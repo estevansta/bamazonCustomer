@@ -54,9 +54,9 @@ inquirer
 
 })
 
-.then(function(answer) {
-  // based on their answer, either call the bid or the post functions
-  if (answer.res.product_name + " | " + answer.res.price) 
-    (console.log(answer));
-  });
+// .then(function(answer) {
+//   // based on their answer, either call the bid or the post functions
+//   if (answer.res.product_name + " | " + answer.res.price) 
+//     (console.log(answer));
+//   });
 

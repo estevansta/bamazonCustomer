@@ -2,6 +2,7 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 
+
 var connection = mysql.createConnection({
   host: "localhost",
 
@@ -20,9 +21,8 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
   if (err) throw err;
   console.log("connected as id " + connection.threadId);
-  // call back functions for displaying table and inquirer queries 
+  // call back functions, display table as soon as app runs
   displayTable();
-  // purchaseQuery();
   // howManyUnits();
   // checkStock();
   // totalCost();
@@ -45,4 +45,18 @@ function displayTable() {
   });
 }
 
+
+inquirer
+.prompt({
+  name: "item",
+  type: "input",
+  message: "Input the item ID of the item you wish to purchase",
+
+})
+
+.then(function(answer) {
+  // based on their answer, either call the bid or the post functions
+  if (answer.res.product_name + " | " + answer.res.price) 
+    (console.log(answer));
+  });
 

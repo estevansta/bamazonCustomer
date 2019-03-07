@@ -20,5 +20,29 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
   if (err) throw err;
   console.log("connected as id " + connection.threadId);
-  connection.end();
+  // call back functions for displaying table and inquirer queries 
+  displayTable();
+  // purchaseQuery();
+  // howManyUnits();
+  // checkStock();
+  // totalCost();
 });
+
+// display table function
+function displayTable() {
+  // grabbing the data from my products table
+  console.log(" ")
+  console.log("        WELCOME TO BAMAZON ");
+  console.log("-----------------------------------");
+  console.log("ID | Item Name  | Deparment | Price | Stock ")
+  connection.query("SELECT * FROM products", function(err, res) {
+    // looping through length of the results
+    for (var i = 0; i < res.length; i++) {
+       // console.log the data onto the command line
+      console.log(res[i].item_id + " | " + res[i].product_name + " | " + res[i].department_name + " | " + "$"+ res[i].price + " | " + res[i].stock_quantity);
+    }
+    console.log("-----------------------------------");
+  });
+}
+
+

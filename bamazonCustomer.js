@@ -58,6 +58,7 @@ function promptUser () {
     {
     name: "item",
     type: "input",
+    // for some reason this message still appears first before the displayTable function
     message: "Input the item ID of the item you wish to purchase",
     validate: function integerCheck(res) {
       // regex expression that only allows positive integers via regexlib.com

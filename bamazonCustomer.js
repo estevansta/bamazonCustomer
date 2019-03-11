@@ -23,7 +23,7 @@ connection.connect(function(err) {
   console.log("connected as id " + connection.threadId);
   // call back functions, display table as soon as app runs
   displayTable();
-  // howManyUnits();
+  // itemQuantity();
   // checkStock();
   // totalCost();
 });
@@ -54,19 +54,28 @@ function displayTable() {
 
 function promptUser () {
   inquirer
-  .prompt({
+  .prompt([
+    {
     name: "item",
     type: "input",
     message: "Input the item ID of the item you wish to purchase",
-    validate: function (item) {
+    validate: function integerCheck(res) {
       // regex expression that only allows positive integers via regexlib.com
       var integer = /^\d+$/;
       // return a the integer and test the item chose so that it only allows the input of the positive integer
-      return integer.test(item)
+      return integer.test(res);
+    }
     },
-  })
-
-
+    {
+    name: "itemQuantity",
+    type: "input",
+    message: "How many would you like to purchase?",
+    validate: function integerCheck(res) {
+              var integer = /^\d+$/;
+              return integer.test(res);
+              }
+    }
+  ]);
 }
 
 promptUser();

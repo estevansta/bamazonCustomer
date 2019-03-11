@@ -42,17 +42,35 @@ function displayTable() {
       console.log(res[i].item_id + " | " + res[i].product_name + " | " + res[i].department_name + " | " + "$"+ res[i].price + " | " + res[i].stock_quantity);
     }
     console.log("-----------------------------------");
+    console.log("Press Enter to Continute")
   });
+  connection.end();
 }
 
 
-inquirer
-.prompt({
-  name: "item",
-  type: "input",
-  message: "Input the item ID of the item you wish to purchase",
 
-})
+//prompt the user so that the prompt doesnt load the same time the table does; 
+// add a function to the validation to return the item name 
+
+function promptUser () {
+  inquirer
+  .prompt({
+    name: "item",
+    type: "input",
+    message: "Input the item ID of the item you wish to purchase",
+    validate: function (item) {
+      // regex expression that only allows positive integers via regexlib.com
+      var integer = /^\d+$/;
+      // return a the integer and test the item chose so that it only allows the input of the positive integer
+      return integer.test(item)
+    },
+  })
+
+
+}
+
+promptUser();
+
 
 // .then(function(answer) {
 //   // based on their answer, either call the bid or the post functions

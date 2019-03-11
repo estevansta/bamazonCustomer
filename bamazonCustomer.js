@@ -42,7 +42,7 @@ function displayTable() {
       console.log(res[i].item_id + " | " + res[i].product_name + " | " + res[i].department_name + " | " + "$"+ res[i].price + " | " + res[i].stock_quantity);
     }
     console.log("-----------------------------------");
-    console.log("Press Enter to Continute")
+    console.log("Press Enter to spend some Buckarooos")
   });
   connection.end();
 }
@@ -61,11 +61,11 @@ function promptUser () {
     // for some reason this message still appears first before the displayTable function
     message: "Input the item ID of the item you wish to purchase",
     validate: function integerCheck(res) {
-      // regex expression that only allows positive integers via regexlib.com
-      var integer = /^\d+$/;
-      // return a the integer and test the item chose so that it only allows the input of the positive integer
-      return integer.test(res);
-    }
+              // regex expression that only allows positive integers via regexlib.com
+              var integer = /^\d+$/;
+              // return a the integer and test the item chose so that it only allows the input of the positive integer
+              return integer.test(res);
+              }
     },
     {
     name: "itemQuantity",
@@ -76,10 +76,23 @@ function promptUser () {
               return integer.test(res);
               }
     }
-  ]);
+    //a response to the inputs above
+]).then(function(answer) {
+        // code used from topSongs5000 Where 
+        var query = "SELECT * FROM products WHERE ?"
+        // var itemQuantity = "SELECT * FROM products WHERE stock_quantity = ?"
+        connection.query(query, { item_id: answer.item }, function(err, res) {
+          console.log("You Chose item " + answer.item);
+        
+      });
+
+  }
+  );
 }
 
 promptUser();
+
+
 
 
 // .then(function(answer) {

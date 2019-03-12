@@ -82,7 +82,14 @@ function promptUser () {
         var query = "SELECT * FROM products WHERE ?"
         // var itemQuantity = "SELECT * FROM products WHERE stock_quantity = ?"
         connection.query(query, { item_id: answer.item }, function(err, res) {
+          // if product is in stock; console.log item ID and update the stock quantity
+          if (answer.itemQuantity <= res[i].stock_quantity)
           console.log("You Chose item " + answer.item);
+          // if not insufficent stock then return message that low stock
+          else {
+            console.log("Sorry low stock, please try another item or a smaller quanitity")
+            promptUser();
+          }
         
       });
 
